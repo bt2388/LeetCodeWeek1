@@ -1,0 +1,24 @@
+class Solution(object):
+    def videoStitching(self, clips, time):
+        """
+        :type clips: List[List[int]]
+        :type time: int
+        :rtype: int
+        """
+        clips = sorted(clips)
+        start, end = 0, 0
+        index = 0
+        counter = 0
+        while(start <= end):
+            counter+=1
+            next_start = end+1
+            next_end = end
+            while(index< len(clips) and start<= clips[index][0] <=end):
+                next_end = max(next_end, clips[index][1])
+                if next_end >= time:
+                    return counter
+                index+=1
+            start = next_start
+            end = next_end
+        return -1
+        
